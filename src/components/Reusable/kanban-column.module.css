@@ -1,0 +1,12 @@
+.column-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: lightgray;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.column-container .title {
+  margin-bottom: 10px;
+}
