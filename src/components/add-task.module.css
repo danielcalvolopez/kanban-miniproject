@@ -1,0 +1,21 @@
+.add-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-container input {
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+
+.add-container button {
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: rgba(241, 241, 241, 0.498);
+  cursor: pointer;
+}
