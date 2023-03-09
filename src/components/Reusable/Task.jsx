@@ -1,7 +1,20 @@
 import classes from "./task.module.css";
+import { useDrag } from "react-dnd";
 
 const Task = ({ title, id }) => {
-  return <div className={classes["task-container"]}>{title}</div>;
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "task",
+    item: { id: id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <div ref={drag} className={classes["task-container"]}>
+      {title}
+    </div>
+  );
 };
 
 export default Task;

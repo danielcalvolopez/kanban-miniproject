@@ -1,8 +1,8 @@
-import { DndProvider } from "react-dnd";
 import classes from "./kanban.module.css";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { v4 as uuid } from "uuid";
 import Task from "./Reusable/Task";
+import { useDrop } from "react-dnd";
+import { useState } from "react";
 
 const tasksList = [
   { id: uuid(), title: "Task 1" },
@@ -12,17 +12,37 @@ const tasksList = [
 ];
 
 const Kanban = () => {
+  const [data, setData] = useState(tasksList);
+  const [data2, setData2] = useState([]);
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "task",
+    drop: (item) => addTaskToColumn(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  const addTaskToColumn = (id) => {
+    const taskFound = tasksList.filter((task) => id === task.id);
+
+    data2.splice(data2.findIndex((task) => task.id === taskFound));
+    setData2((data2) => [...data2, taskFound[0]]);
+  };
+
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className={classes.kanban}>
-        <div className={classes.col}>
-          {tasksList.map((task) => (
-            <Task key={task.id} id={task.id} title={task.title} />
-          ))}
-        </div>
-        <div className={classes.col}></div>
+    <div className={classes.kanban}>
+      <div ref={drop} className={classes.col}>
+        {data.map((task) => (
+          <Task key={task.id} id={task.id} title={task.title} />
+        ))}
       </div>
-    </DndProvider>
+      <div ref={drop} className={classes.col}>
+        {data2.map((task) => (
+          <Task key={task.id} id={task.id} title={task.title} />
+        ))}
+      </div>
+    </div>
   );
 };
 
