@@ -1,7 +1,7 @@
 import classes from "./task.module.css";
 
-const Task = ({ children }) => {
-  return <div className={classes["task-container"]}>{children}</div>;
+const Task = ({ title, id }) => {
+  return <div className={classes["task-container"]}>{title}</div>;
 };
 
 export default Task;

@@ -1,97 +1,28 @@
+import { DndProvider } from "react-dnd";
 import classes from "./kanban.module.css";
-import KanbanDone from "./KanbanDone";
-import KanbanInProgress from "./KanbanInProgress";
-import KanbanTesting from "./KanbanTesting";
-import KanbanToDo from "./KanbanToDo";
-import { useState } from "react";
-import AddTask from "./AddTask";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { v4 as uuid } from "uuid";
-import KanbanColumn from "./Reusable/KanbanColumn";
+import Task from "./Reusable/Task";
 
-const initialData = [
-  {
-    id: uuid(),
-    title: "To Do",
-    tasks: [
-      {
-        id: uuid(),
-        title: "Learn Threejs",
-      },
-      {
-        id: uuid(),
-        title: "Learn GSAP",
-      },
-      {
-        id: uuid(),
-        title: "Learn Angular",
-      },
-    ],
-  },
-  {
-    id: uuid(),
-    title: "In Progress",
-    tasks: [
-      {
-        id: uuid(),
-        title: "Learn JS",
-      },
-      {
-        id: uuid(),
-        title: "Learn React",
-      },
-      {
-        id: uuid(),
-        title: "Learn Redux",
-      },
-    ],
-  },
-  {
-    id: uuid(),
-    title: "Done",
-    tasks: [
-      {
-        id: uuid(),
-        title: "Learn CSS",
-      },
-      {
-        id: uuid(),
-        title: "Learn HTML",
-      },
-      {
-        id: uuid(),
-        title: "Learn Git",
-      },
-    ],
-  },
+const tasksList = [
+  { id: uuid(), title: "Task 1" },
+  { id: uuid(), title: "Task 2" },
+  { id: uuid(), title: "Task 3" },
+  { id: uuid(), title: "Task 4" },
 ];
 
 const Kanban = () => {
-  const [todoTasks, setTodoTasks] = useState([]);
-  const [inProgressTasks, setInProgressTasks] = useState([]);
-  const [testingTasks, setTestingTasks] = useState([]);
-  const [doneTasks, setDoneTasks] = useState([]);
-  const [data, setData] = useState(initialData);
-
-  console.log(data);
-
-  const addNewCard = (title, content) => {
-    setTodoTasks([...todoTasks, { title, content }]);
-  };
-
   return (
-    <>
-      <AddTask addCard={addNewCard} />
-
+    <DndProvider backend={HTML5Backend}>
       <div className={classes.kanban}>
-        {data.map((column) => (
-          <KanbanColumn key={column.id} title={column.title} data={data} />
-        ))}
-        {/* <KanbanToDo title="To Do" data={todoTasks} />
-        <KanbanInProgress title="In Progress" data={inProgressTasks} />
-        <KanbanTesting title="Testing" data={testingTasks} />
-        <KanbanDone title="Done" data={doneTasks} /> */}
+        <div className={classes.col}>
+          {tasksList.map((task) => (
+            <Task key={task.id} id={task.id} title={task.title} />
+          ))}
+        </div>
+        <div className={classes.col}></div>
       </div>
-    </>
+    </DndProvider>
   );
 };
 

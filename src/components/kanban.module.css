@@ -1,6 +1,18 @@
 .kanban {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  width: 1000px;
+  width: 700px;
+}
+
+.kanban .col {
+  background-color: rgb(230, 229, 229);
+}
+
+.kanban .task {
+  background-color: white;
+  text-align: center;
+  padding: 10px 10px;
+  margin: 5px 5px;
+  cursor: grab;
 }
