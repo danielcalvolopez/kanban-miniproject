@@ -1,17 +1,22 @@
 import classes from "./task.module.css";
 import { useDrag } from "react-dnd";
+import { useRef } from "react";
 
 const Task = ({ title, id }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "task",
-    item: { id: id },
+  const ref = useRef(null);
+  const [{ isDragging }, drag] = useDrag({
+    type: "card",
+    item: id,
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
-  }));
+  });
+
+  const opacity = isDragging ? 0 : 1;
+  drag(ref);
 
   return (
-    <div ref={drag} className={classes["task-container"]}>
+    <div ref={ref} style={{ opacity }} className={classes["task-container"]}>
       {title}
     </div>
   );
