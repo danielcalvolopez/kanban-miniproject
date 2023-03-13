@@ -1,3 +1,30 @@
-.column {
-  background-color: rgb(230, 229, 229);
+.column-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(233, 233, 233);
+  border-radius: 5px;
+  padding: 20px 20px;
+}
+
+.column-container .header {
+  margin-bottom: 20px;
+}
+
+.column-container .button {
+  font-size: 25px;
+  color: gray;
+  width: 100%;
+  background-color: rgba(195, 195, 195, 0.693);
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.column-container .list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

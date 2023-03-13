@@ -12,8 +12,10 @@ const Column = ({ stage, changeTaskStatus, children }) => {
   });
   drop(ref);
   return (
-    <div className={classes.column} ref={ref}>
-      {children}
+    <div className={classes["column-container"]}>
+      <h2 className={classes.header}>TODO</h2>
+      <button className={classes.button}>+</button>
+      <div className={classes.list}>{children}</div>
     </div>
   );
 };
